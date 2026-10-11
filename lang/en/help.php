@@ -7,6 +7,7 @@ return [
     'demo_bar_admin' => 'Staff admin',
     'demo_bar_source' => 'Source on GitHub',
     'about_title' => 'New here? Read about this demo',
+    'powered_by' => 'Powered by',
     'about_body' => 'What Fernleaf is, and what to try to see the knowledge base features.',
     'language' => 'Language',
     'back_to' => 'Back to :place',

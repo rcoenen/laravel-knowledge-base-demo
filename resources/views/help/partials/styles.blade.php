@@ -193,6 +193,9 @@ a.kb-langs__item:hover { background: var(--kb-mist); color: var(--kb-ink) !impor
 .kb-footer { padding: 32px 0 48px; border-top: 1px solid var(--kb-rule); font-size: 0.9rem; }
 .kb-footer a { color: var(--kb-slate); text-decoration: none; }
 .kb-footer a:hover { color: var(--kb-ink); }
+.kb-footer .kb-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.kb-footer__powered { color: var(--kb-slate); }
+.kb-footer__powered a { text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 820px) {
     .kb-wrap { padding-left: 16px; padding-right: 16px; }

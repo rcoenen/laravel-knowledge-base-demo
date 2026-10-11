@@ -112,6 +112,15 @@ it('shows the Fernleaf logo before the brand name', function () {
     $this->get('/en/help')->assertOk()->assertSee('data-logo', false)->assertSee('Fernleaf');
 });
 
+it('credits Laravel Knowledge Base in the footer, opening in a new tab', function () {
+    $this->get('/en/help')
+        ->assertOk()
+        ->assertSee('Powered by')
+        ->assertSee('href="'.config('help-center.links.core').'" target="_blank" rel="noopener"', false);
+
+    $this->get('/de/help')->assertOk()->assertSee('Betrieben mit');
+});
+
 it('says on every page that this is a demo', function () {
     $this->get('/en/help')->assertOk()->assertSee('data-demo-bar', false)->assertSee('Fernleaf is not a real shop.');
     $this->get('/de/help/articles/wann-kommt-meine-bestellung-an')->assertOk()->assertSee('Fernleaf ist kein echter Shop.');
