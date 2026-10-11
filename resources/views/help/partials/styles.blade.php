@@ -195,8 +195,8 @@ a.kb-langs__item:hover { background: var(--kb-mist); color: var(--kb-ink) !impor
 .kb-footer a:hover { color: var(--kb-ink); }
 .kb-footer .kb-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 .kb-footer .kb-wrap > a { font-weight: 600; }
-.kb-footer__powered { color: var(--kb-slate); font-size: 0.82rem; font-style: italic; opacity: 0.8; }
-.kb-footer__powered a { text-decoration: underline; text-underline-offset: 2px; }
+.kb-footer__credit { color: var(--kb-slate); font-size: 0.82rem; font-style: italic; opacity: 0.8; }
+.kb-footer__credit a { text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 820px) {
     .kb-wrap { padding-left: 16px; padding-right: 16px; }

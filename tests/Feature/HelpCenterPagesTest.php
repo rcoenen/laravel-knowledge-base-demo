@@ -115,10 +115,10 @@ it('shows the Fernleaf logo before the brand name', function () {
 it('credits Laravel Knowledge Base in the footer, opening in a new tab', function () {
     $this->get('/en/help')
         ->assertOk()
-        ->assertSee('Powered by')
+        ->assertSee('Built with')
         ->assertSee('href="'.config('help-center.links.core').'" target="_blank" rel="noopener"', false);
 
-    $this->get('/de/help')->assertOk()->assertSee('Betrieben mit');
+    $this->get('/de/help')->assertOk()->assertSee('Erstellt mit');
 });
 
 it('says on every page that this is a demo', function () {

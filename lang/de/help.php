@@ -7,7 +7,7 @@ return [
     'demo_bar_admin' => 'Admin für Mitarbeiter',
     'demo_bar_source' => 'Quellcode auf GitHub',
     'about_title' => 'Neu hier? Lies mehr über diese Demo',
-    'powered_by' => 'Betrieben mit',
+    'built_with' => 'Erstellt mit',
     'about_body' => 'Was Fernleaf ist und was du ausprobieren kannst, um die Funktionen der Wissensdatenbank zu sehen.',
     'language' => 'Sprache',
     'back_to' => 'Zurück: :place',

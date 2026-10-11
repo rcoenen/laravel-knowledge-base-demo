@@ -78,8 +78,8 @@
     <footer class="kb-footer">
         <div class="kb-wrap">
             <a href="{{ HelpRoutes::url('home', $locale) }}">{{ $brand }} {{ __('help.help') }}</a>
-            <span class="kb-footer__powered" data-powered-by>
-                {{ __('help.powered_by') }}
+            <span class="kb-footer__credit" data-built-with>
+                {{ __('help.built_with') }}
                 <a href="{{ config('help-center.links.core') }}" target="_blank" rel="noopener">Laravel Knowledge Base</a>
             </span>
         </div>
