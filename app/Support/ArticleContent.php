@@ -4,11 +4,15 @@ namespace App\Support;
 
 use DOMDocument;
 use DOMElement;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use JeffersonGoncalves\KnowledgeBase\Models\Contracts\ArticleContract;
+use JeffersonGoncalves\KnowledgeBase\Support\ArticleAssets;
 
 /**
- * Prepares article content for display: plain text becomes paragraphs, and
- * every <h2> gets a stable id so the page can show an "On this page" list.
+ * Prepares article content for display: asset references are resolved to
+ * current URLs, plain text becomes paragraphs, and every <h2> gets a stable id
+ * so the page can show an "On this page" list.
  *
  * Article HTML is written by staff in the admin and rendered as-is, like the
  * rest of the knowledge base; it is not sanitised here.
@@ -18,8 +22,15 @@ final class ArticleContent
     /**
      * @return array{html: string, toc: list<array{id: string, text: string}>}
      */
-    public static function prepare(string $content): array
+    public static function prepare(string $content, ?Model $article = null): array
     {
+        // Readers must never see a broken image or a dead file link, so resolve
+        // every asset reference first: missing images are left out and missing
+        // file links become plain text (see the core's ArticleAssets::resolve()).
+        if ($article instanceof ArticleContract) {
+            $content = app(ArticleAssets::class)->resolve($content, $article, forPublic: true);
+        }
+
         $content = trim($content);
 
         if ($content === '') {

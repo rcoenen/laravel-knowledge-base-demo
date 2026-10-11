@@ -6,12 +6,15 @@ use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Number;
 use Illuminate\Support\Str;
+use JeffersonGoncalves\KnowledgeBase\Enums\AssetKind;
 use JeffersonGoncalves\KnowledgeBase\Enums\TranslationStatus;
 use JeffersonGoncalves\KnowledgeBase\Models\Article;
 use JeffersonGoncalves\KnowledgeBase\Models\Category;
 use JeffersonGoncalves\KnowledgeBase\Models\Collection;
 use JeffersonGoncalves\KnowledgeBase\Services\KnowledgeBaseService;
+use JeffersonGoncalves\KnowledgeBase\Support\ArticleAssets;
 use JeffersonGoncalves\KnowledgeBase\Support\Locales;
 
 /**
@@ -235,6 +238,10 @@ HTML,
             'content' => '<p>Internal: ask for a photo, then offer a replacement or a refund.</p>',
         ], visibility: 'internal');
 
+        // One shared image used in English and German, one German-only image and
+        // one PDF attachment, so the demo shows the whole asset flow.
+        $this->attachAssets($arrival);
+
         $howOften->relatedArticles()->attach($lowLight->getKey(), ['sort_order' => 1]);
         $lowLight->relatedArticles()->attach($howOften->getKey(), ['sort_order' => 1]);
         $arrival->relatedArticles()->attach($howOften->getKey(), ['sort_order' => 1]);
@@ -264,6 +271,53 @@ HTML,
         foreach ([$howOften, $delivery, $arrival, $paying, $email, $repot, $firstOrder] as $article) {
             $faq->addArticle($article);
         }
+    }
+
+    /**
+     * Give one article a shared image, a German-only image and a PDF, and put
+     * them in the article's content: the shared image in both languages, the
+     * German image and the file link only in the language that uses them.
+     */
+    private function attachAssets(Article $article): void
+    {
+        $assets = app(ArticleAssets::class);
+        $directory = database_path('seeders/assets');
+
+        $shared = $assets->store($article, $directory.'/fernleaf-plant.png', AssetKind::Image);
+        $guide = $assets->store($article, $directory.'/fernleaf-care-guide.pdf', AssetKind::File);
+        $german = $this->translate
+            ? $assets->store($article, $directory.'/fernleaf-plant-de.png', AssetKind::Image, self::TRANSLATION_LOCALE)
+            : null;
+
+        $sharedImage = $this->imageMarkup($assets, $shared, 'A fern in a pot');
+        $guideLink = '<p><a href="'.$assets->url($guide).'">'
+            .$guide->getAttribute('original_name').', '
+            .Number::fileSize((int) $guide->getAttribute('size')).'</a></p>';
+
+        $english = $article->translation(Locales::default());
+
+        if ($english instanceof Model) {
+            $english->update(['content' => (string) $english->getAttribute('content').$sharedImage.$guideLink]);
+        }
+
+        if ($german instanceof Model) {
+            $germanImage = $this->imageMarkup($assets, $german, 'Eine Farnpflanze im Topf');
+            $translation = $article->translation(self::TRANSLATION_LOCALE);
+
+            if ($translation instanceof Model) {
+                $translation->update(['content' => (string) $translation->getAttribute('content').$sharedImage.$germanImage]);
+            }
+        }
+    }
+
+    /**
+     * An image element that refers to an asset by its id, with the current URL
+     * as a cache (the public pages recompute it).
+     */
+    private function imageMarkup(ArticleAssets $assets, Model $asset, string $alt): string
+    {
+        return '<p><img data-id="'.$asset->getAttribute('uuid').'" src="'
+            .$assets->url($asset).'" alt="'.$alt.'"></p>';
     }
 
     /**

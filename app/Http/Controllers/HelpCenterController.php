@@ -111,12 +111,12 @@ class HelpCenterController extends Controller
         }
 
         $translation = $page->translation;
-        $authoritative = $page->article->getAttribute('source_locale');
+        $authoritative = $page->article->authoritativeLocale();
 
         return view('help.article', [
             'locale' => $locale,
             'page' => $page,
-            'content' => ArticleContent::prepare((string) $translation->getAttribute('content')),
+            'content' => ArticleContent::prepare((string) $translation->getAttribute('content'), $page->article),
             'updatedAt' => $translation->getAttribute('updated_at'),
             'isOutdated' => config('help-center.show_outdated_notice', true)
                 && (bool) $translation->getAttribute('is_outdated'),

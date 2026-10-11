@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 
 abstract class TestCase extends BaseTestCase
@@ -17,5 +18,8 @@ abstract class TestCase extends BaseTestCase
         }
 
         parent::setUp();
+
+        // The seeder stores article assets; keep them out of the real storage.
+        Storage::fake('public');
     }
 }
