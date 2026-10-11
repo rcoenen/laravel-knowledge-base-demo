@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use JeffersonGoncalves\FilamentKnowledgeBase\KnowledgeBasePlugin;
+use JeffersonGoncalves\KnowledgeBase\Models\Article;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,7 +35,16 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('filament.brand'))
             ->brandLogoHeight('2rem')
             ->favicon(asset('images/fernleaf-logo.svg'))
-            ->plugins([KnowledgeBasePlugin::make()])
+            ->plugins([
+                // "View on site" opens the article on the public help pages;
+                // they redirect to the language's own slug themselves.
+                KnowledgeBasePlugin::make()->publicUrlUsing(
+                    fn (Article $article, string $locale): string => route('help.article', [
+                        'locale' => $locale,
+                        'slug' => $article->getAttribute('slug'),
+                    ]),
+                ),
+            ])
             ->colors([
                 'primary' => Color::Green,
             ])
