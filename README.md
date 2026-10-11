@@ -66,6 +66,7 @@ Without Docker (PHP 8.2+ with intl, SQLite): `composer setup`, then `php artisan
 The first article in the help center, "About this demo", links to each of these.
 
 - **Two languages.** English is the authoritative language, German the translation. Switch with the flags at the top.
+- **Your language first.** Opening the help center without a language (`/` or `/help`) picks English or German from your browser settings, and remembers the language you choose.
 - **A missing translation.** An article without a German version is served in English to German readers, with a notice.
 - **An outdated translation.** When the English version changes, the German one can be flagged as outdated; readers see a warning and a link to the English version.
 - **Search per language.** A German search finds German versions.

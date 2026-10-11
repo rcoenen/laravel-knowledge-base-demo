@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 use JeffersonGoncalves\KnowledgeBase\Services\KnowledgeBaseService;
 use JeffersonGoncalves\KnowledgeBase\Support\HelpCenter;
@@ -19,13 +20,32 @@ use JeffersonGoncalves\KnowledgeBase\Support\Locales;
  */
 class HelpCenterController extends Controller
 {
+    /** The reader's language, remembered for a year. */
+    private const LOCALE_COOKIE = 'help_locale';
+
     public function __construct(private readonly HelpCenter $help) {}
 
-    public function entry(): RedirectResponse
+    /**
+     * The help center without a language (/ and /help): the language the
+     * reader chose before, else the best match for their browser, else the
+     * default language. A choice always wins over the browser setting.
+     */
+    public function entry(Request $request): RedirectResponse
     {
-        $locale = Locales::isConfigured(app()->getLocale()) ? app()->getLocale() : Locales::default();
+        $chosen = $request->cookie(self::LOCALE_COOKIE);
 
-        return redirect()->route(HelpRoutes::name('home'), ['locale' => $locale]);
+        if (is_string($chosen) && Locales::isConfigured($chosen)) {
+            $locale = $chosen;
+        } else {
+            // Symfony returns the first entry when nothing matches, so list
+            // the default language first.
+            $candidates = array_values(array_unique([Locales::default(), ...Locales::all()]));
+            $locale = $request->getPreferredLanguage($candidates) ?? Locales::default();
+        }
+
+        return redirect()
+            ->route(HelpRoutes::name('home'), ['locale' => $locale])
+            ->header('Vary', 'Accept-Language, Cookie');
     }
 
     public function home(string $locale): View
@@ -208,6 +228,9 @@ class HelpCenterController extends Controller
         abort_unless(Locales::isConfigured($locale), 404);
 
         app()->setLocale($locale);
+
+        // Remember the reader's language for their next visit to / or /help.
+        Cookie::queue(self::LOCALE_COOKIE, $locale, 60 * 24 * 365);
     }
 
     /**

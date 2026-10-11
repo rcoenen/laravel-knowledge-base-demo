@@ -22,6 +22,10 @@
     @foreach ($switch as $alternateLocale => $alternateUrl)
         <link rel="alternate" hreflang="{{ $alternateLocale }}" href="{{ $alternateUrl }}">
     @endforeach
+    @if (isset($switch[\JeffersonGoncalves\KnowledgeBase\Support\Locales::default()]))
+        {{-- Readers whose language isn't offered get the authoritative version. --}}
+        <link rel="alternate" hreflang="x-default" href="{{ $switch[\JeffersonGoncalves\KnowledgeBase\Support\Locales::default()] }}">
+    @endif
     @include('help.partials.styles')
 </head>
 <body class="kb">

@@ -199,11 +199,46 @@ it('describes each topic on the home page', function () {
         ->assertSee('kb-chips--small', false);
 });
 
-it('shows a flag per language in the switcher, with the language name for screen readers', function () {
+it('shows a flag and the language code in the switcher, with the language name for screen readers', function () {
     $this->get('/en/help')
         ->assertOk()
         ->assertSee('class="kb-flag"', false)
+        ->assertSee('<span class="kb-langs__code" aria-hidden="true">DE</span>', false)
         ->assertSee('<span class="kb-visually-hidden">English</span>', false)
-        ->assertSee('<span class="kb-visually-hidden">Deutsch</span>', false)
-        ->assertDontSee('>EN</span>', false);
+        ->assertSee('<span class="kb-visually-hidden">Deutsch</span>', false);
+});
+
+it('opens the help center in the browser\'s language on a first visit', function () {
+    $this->get('/', ['Accept-Language' => 'de-DE,de;q=0.9,en;q=0.8'])->assertRedirect('/de/help');
+    $this->get('/help', ['Accept-Language' => 'en-US,en;q=0.9'])->assertRedirect('/en/help');
+
+    // A language the help center doesn't offer: the default language.
+    $this->get('/help', ['Accept-Language' => 'fr-FR,fr;q=0.9'])->assertRedirect('/en/help');
+});
+
+it('remembers the language the reader chose for a year', function () {
+    $this->get('/de/help')->assertOk()->assertCookie('help_locale', 'de');
+
+    // A German reader with an English browser stays in German.
+    $this->withCookie('help_locale', 'de')
+        ->get('/', ['Accept-Language' => 'en-US,en;q=0.9'])
+        ->assertRedirect('/de/help');
+
+    // Switching to English is remembered too, even with a German browser.
+    $this->get('/en/help')->assertCookie('help_locale', 'en');
+    $this->withCookie('help_locale', 'en')
+        ->get('/help', ['Accept-Language' => 'de-DE,de;q=0.9'])
+        ->assertRedirect('/en/help');
+});
+
+it('ignores a remembered language that is no longer offered', function () {
+    $this->withCookie('help_locale', 'fr')
+        ->get('/', ['Accept-Language' => 'de-DE,de;q=0.9'])
+        ->assertRedirect('/de/help');
+});
+
+it('points search engines to the authoritative version with x-default', function () {
+    $this->get('/de/help/articles/wann-kommt-meine-bestellung-an')
+        ->assertOk()
+        ->assertSee('hreflang="x-default" href="'.url('/en/help/articles/when-will-my-order-arrive').'"', false);
 });

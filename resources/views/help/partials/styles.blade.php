@@ -62,9 +62,9 @@
 a.kb-langs__item:hover { background: var(--kb-mist); color: var(--kb-ink) !important; }
 .kb-langs__item[aria-current] { color: var(--kb-ink) !important; box-shadow: inset 0 -2px 0 var(--kb-accent); border-radius: 0; }
 .kb-langs__item--off { opacity: 0.4; }
-.kb-flag { display: block; width: 1.5rem; height: 1.125rem; overflow: hidden; border-radius: 3px; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12); }
+.kb-flag { display: block; flex: none; width: 1.5rem; height: 1.125rem; overflow: hidden; border-radius: 3px; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12); }
 .kb-flag svg { display: block; width: 100%; height: 100%; }
-.kb-langs__item:has(.kb-flag) { min-width: 0; padding: 6px 6px 8px; }
+.kb-langs__item:has(.kb-flag) { display: inline-flex; align-items: center; gap: 6px; min-width: 0; padding: 6px 6px 8px; }
 
 .kb-main { display: block; outline: none; }
 .kb-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

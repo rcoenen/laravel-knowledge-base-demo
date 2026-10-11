@@ -1,6 +1,6 @@
 @php use App\Support\HelpRoutes; @endphp
 @if ($flag = HelpRoutes::flag($code))
-<span class="kb-flag" aria-hidden="true">{!! $flag !!}</span><span class="kb-visually-hidden">{{ HelpRoutes::languageName($code) }}</span>
+<span class="kb-flag" aria-hidden="true">{!! $flag !!}</span><span class="kb-langs__code" aria-hidden="true">{{ strtoupper($code) }}</span><span class="kb-visually-hidden">{{ HelpRoutes::languageName($code) }}</span>
 @else
 {{ strtoupper($code) }}
 @endif

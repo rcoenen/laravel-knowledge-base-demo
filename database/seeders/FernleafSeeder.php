@@ -284,6 +284,7 @@ HTML,
 <h2>What to try</h2>
 <ul>
 <li><strong>Two languages.</strong> Switch to German with the flags at the top. English is the authoritative language; most articles also have a German version.</li>
+<li><strong>Your language first.</strong> Opening the help center without a language, like <a href="/">the start page</a>, picks English or German from your browser settings and remembers the language you choose.</li>
 <li><strong>A missing translation.</strong> <a href="/de/help/articles/how-often-should-i-water-my-plants">This article</a> has no German version, so German readers get the English one, with a notice.</li>
 <li><strong>An outdated translation.</strong> The English version of <a href="/de/help/articles/wie-topfe-ich-eine-pflanze-um">this article</a> changed after it was translated, so the German version is flagged as possibly out of date.</li>
 <li><strong>Search per language.</strong> <a href="/de/help/search?q=Lieferung">Search in German</a> finds the German versions.</li>
@@ -304,6 +305,7 @@ HTML,
 <h2>Was du ausprobieren kannst</h2>
 <ul>
 <li><strong>Zwei Sprachen.</strong> Wechsle oben über die Flaggen zu Englisch. Englisch ist die maßgebliche Sprache; die meisten Artikel haben auch eine deutsche Version.</li>
+<li><strong>Deine Sprache zuerst.</strong> Öffnest du das Hilfecenter ohne Sprache, wie <a href="/">die Startseite</a>, wählt es Englisch oder Deutsch nach deinen Browsereinstellungen und merkt sich die Sprache, die du wählst.</li>
 <li><strong>Eine fehlende Übersetzung.</strong> <a href="/de/help/articles/how-often-should-i-water-my-plants">Dieser Artikel</a> hat keine deutsche Version. Du bekommst die englische, mit einem Hinweis.</li>
 <li><strong>Eine veraltete Übersetzung.</strong> Die englische Version von <a href="/de/help/articles/wie-topfe-ich-eine-pflanze-um">diesem Artikel</a> wurde nach der Übersetzung geändert, deshalb ist die deutsche als möglicherweise veraltet markiert.</li>
 <li><strong>Suche pro Sprache.</strong> <a href="/de/help/search?q=Lieferung">Eine Suche auf Deutsch</a> findet die deutschen Versionen.</li>
