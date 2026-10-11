@@ -2,6 +2,10 @@
 
 # Laravel Knowledge Base demo: a complete help center
 
+| What customers see | What support staff see |
+|---|---|
+| ![The public help center: search, an FAQ and topics, in English and German](docs/screenshots/home.jpg) | ![The staff admin: every article with its status per language](docs/screenshots/admin-articles.jpg) |
+
 Almost every online service has a help section: a web shop, a SaaS app, a booking site. Customers search it, browse it by topic and scan the FAQ; support staff write and update it, often in more than one language.
 
 This demo shows [laravel-knowledge-base](https://github.com/jeffersongoncalves/laravel-knowledge-base) running such a help section, with its [Filament plugin](https://github.com/jeffersongoncalves/filament-knowledge-base) as the staff admin. The help section belongs to **Fernleaf**, a made-up houseplant shop. The shop itself doesn't exist (nothing is for sale and every article is fictional); it only gives the help content something realistic to be about.
@@ -71,13 +75,11 @@ The first article in the help center, "About this demo", links to each of these.
 
 ## Screenshots
 
-| Help center home | About this demo |
+| About this demo | Admin: a tab per language |
 |---|---|
-| ![Help center home with the about card, quick answers and topics](docs/screenshots/home.jpg) | ![The about article listing what to try](docs/screenshots/about.jpg) |
+| ![The about article listing what to try](docs/screenshots/about.jpg) | ![Editing the German version, marked outdated](docs/screenshots/admin-language-tabs.jpg) |
 | **German reader, English-only article** | **German reader, outdated translation** |
 | ![Notice that the article is not available in German yet](docs/screenshots/missing-translation-de.jpg) | ![Warning that the English version changed after translation](docs/screenshots/outdated-translation-de.jpg) |
-| **Admin: status per language** | **Admin: a tab per language** |
-| ![Article list with a status column per language](docs/screenshots/admin-articles.jpg) | ![Editing the German version, marked outdated](docs/screenshots/admin-language-tabs.jpg) |
 
 ## What's where
 
