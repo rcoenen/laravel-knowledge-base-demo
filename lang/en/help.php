@@ -1,0 +1,46 @@
+<?php
+
+return [
+    'help' => 'Help',
+    'skip' => 'Skip to content',
+    'demo_bar' => 'Demo of Laravel Knowledge Base. Fernleaf is not a real shop.',
+    'demo_bar_admin' => 'Staff admin',
+    'demo_bar_source' => 'Source on GitHub',
+    'about_title' => 'New here? Read about this demo',
+    'about_body' => 'What Fernleaf is, and what to try to see the knowledge base features.',
+    'language' => 'Language',
+    'back_to' => 'Back to :place',
+    'breadcrumb' => 'Breadcrumb',
+
+    'search_heading' => 'What do you need help with?',
+    'search_label' => 'Search the help center',
+    'search_placeholder' => 'Type your question',
+    'search_button' => 'Search',
+    'search_too_short' => 'Type at least :min characters to search.',
+    'results_count' => '{1} 1 article matches “:query”|[2,*] :count articles match “:query”',
+    'no_results' => 'No articles match “:query”.',
+    'no_results_hint' => 'Try fewer or different words, or browse the topics below.',
+    'in_language' => 'In :language',
+
+    'quick_answers' => 'Quick answers',
+    'see_all_questions' => 'All questions',
+    'read_full_answer' => 'Read the full answer',
+    'browse_topics' => 'Browse topics',
+    'articles_count' => '{0} No articles|{1} 1 article|[2,*] :count articles',
+    'empty_category' => 'There are no articles in this topic yet.',
+    'in_this_topic' => 'In this topic',
+    'subtopics' => 'Subtopics',
+
+    'updated' => 'Updated :date',
+    'also_in' => 'Also available in',
+    'on_this_page' => 'On this page',
+    'related' => 'Related articles',
+    'fallback_notice' => 'This article isn’t available in :requested yet. You’re reading the :served version.',
+    'outdated_notice' => 'The :source version of this article changed after this translation was made, so some details may be out of date.',
+    'outdated_link' => 'Read the :source version',
+
+    'helpful_question' => 'Did this answer your question?',
+    'helpful_yes' => 'Yes',
+    'helpful_no' => 'No',
+    'feedback_thanks' => 'Thanks for letting us know.',
+];

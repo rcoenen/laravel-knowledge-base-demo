@@ -1,0 +1,33 @@
+name: fernleaf-demo
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: fernleaf
+      POSTGRES_USER: fernleaf
+      POSTGRES_PASSWORD: fernleaf
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fernleaf -d fernleaf"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  app:
+    build: ./docker
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DEMO_PORT: ${DEMO_PORT:-8000}
+    volumes:
+      - .:/var/www/app
+      - composer-cache:/composer
+    ports:
+      - "${DEMO_PORT:-8000}:8000"
+
+volumes:
+  postgres-data:
+  composer-cache:

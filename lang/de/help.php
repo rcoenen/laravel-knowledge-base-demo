@@ -1,0 +1,46 @@
+<?php
+
+return [
+    'help' => 'Hilfe',
+    'skip' => 'Zum Inhalt springen',
+    'demo_bar' => 'Demo von Laravel Knowledge Base. Fernleaf ist kein echter Shop.',
+    'demo_bar_admin' => 'Admin für Mitarbeiter',
+    'demo_bar_source' => 'Quellcode auf GitHub',
+    'about_title' => 'Neu hier? Lies mehr über diese Demo',
+    'about_body' => 'Was Fernleaf ist und was du ausprobieren kannst, um die Funktionen der Wissensdatenbank zu sehen.',
+    'language' => 'Sprache',
+    'back_to' => 'Zurück: :place',
+    'breadcrumb' => 'Brotkrümelnavigation',
+
+    'search_heading' => 'Wobei können wir dir helfen?',
+    'search_label' => 'Im Hilfe-Center suchen',
+    'search_placeholder' => 'Gib deine Frage ein',
+    'search_button' => 'Suchen',
+    'search_too_short' => 'Gib mindestens :min Zeichen ein, um zu suchen.',
+    'results_count' => '{1} 1 Artikel passt zu „:query“|[2,*] :count Artikel passen zu „:query“',
+    'no_results' => 'Keine Artikel passen zu „:query“.',
+    'no_results_hint' => 'Versuche weniger oder andere Wörter, oder sieh dir die Themen unten an.',
+    'in_language' => 'Auf :language',
+
+    'quick_answers' => 'Schnelle Antworten',
+    'see_all_questions' => 'Alle Fragen',
+    'read_full_answer' => 'Ganze Antwort lesen',
+    'browse_topics' => 'Themen',
+    'articles_count' => '{0} Keine Artikel|{1} 1 Artikel|[2,*] :count Artikel',
+    'empty_category' => 'Zu diesem Thema gibt es noch keine Artikel.',
+    'in_this_topic' => 'In diesem Thema',
+    'subtopics' => 'Unterthemen',
+
+    'updated' => 'Aktualisiert am :date',
+    'also_in' => 'Auch verfügbar auf',
+    'on_this_page' => 'Auf dieser Seite',
+    'related' => 'Verwandte Artikel',
+    'fallback_notice' => 'Dieser Artikel ist noch nicht auf :requested verfügbar. Du liest die Version auf :served.',
+    'outdated_notice' => 'Die Version auf :source wurde geändert, nachdem diese Übersetzung erstellt wurde. Manche Angaben sind daher vielleicht nicht mehr aktuell.',
+    'outdated_link' => 'Version auf :source lesen',
+
+    'helpful_question' => 'Hat dir diese Antwort geholfen?',
+    'helpful_yes' => 'Ja',
+    'helpful_no' => 'Nein',
+    'feedback_thanks' => 'Danke für deine Rückmeldung.',
+];
