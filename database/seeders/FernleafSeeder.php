@@ -345,9 +345,10 @@ HTML,
 <li><strong>Slugs per language.</strong> An English address under /de, like <a href="/de/help/articles/when-will-my-order-arrive">this one</a>, redirects to the German address.</li>
 <li><strong>An FAQ collection.</strong> The <a href="/en/help/collections/frequently-asked-questions">frequently asked questions</a> are a hand-picked, ordered list of articles from several topics.</li>
 <li><strong>Internal articles.</strong> Support staff have an article on handling damaged-plant claims. Customers never see it here, not even in search, but staff do in the <a href="/admin">admin</a>.</li>
+<li><strong>Images and files.</strong> <a href="/en/help/articles/what-to-do-when-your-plant-arrives">This article</a> has a photo, a PDF care guide and, <a href="/de/help/articles/was-tun-wenn-deine-pflanze-ankommt">in German</a>, its own German picture next to the shared photo. Each article keeps its images and files in one folder, and translations reuse them without uploading again.</li>
 </ul>
 <h2>The admin</h2>
-<p>The <a href="/admin">admin</a> is the Filament plugin. Sign in with <strong>admin@fernleaf.test</strong> and password <strong>Pl3nts&amp;P0ts!</strong> (already filled in). There you edit each language in its own tab, mark translations as outdated, set an article to internal and reorder the FAQ.</p>
+<p>The <a href="/admin">admin</a> is the Filament plugin. Sign in with <strong>admin@fernleaf.test</strong> and password <strong>Pl3nts&amp;P0ts!</strong> (already filled in). There you edit each language in its own tab, mark translations as outdated, set an article to internal and reorder the FAQ. In the editor, Insert image and Attach file reuse the article's images and files or upload new ones; the Assets tab shows them all, with where each one is used, and an article that still refers to a deleted image is flagged until it's fixed. View on site opens the article here in a new tab.</p>
 <h2>Under the hood</h2>
 <p>This demo runs on laravel-knowledge-base {$core} and filament-knowledge-base {$plugin}. The public pages are part of this demo app, not of the packages. The source is <a href="{$links['demo']}">on GitHub</a>.</p>
 HTML,
@@ -366,9 +367,10 @@ HTML,
 <li><strong>Adressen pro Sprache.</strong> Eine englische Adresse unter /de, wie <a href="/de/help/articles/when-will-my-order-arrive">diese</a>, leitet zur deutschen Adresse weiter.</li>
 <li><strong>Eine FAQ-Sammlung.</strong> Die <a href="/de/help/collections/haeufige-fragen">häufigen Fragen</a> sind eine ausgewählte, sortierte Liste von Artikeln aus mehreren Themen.</li>
 <li><strong>Interne Artikel.</strong> Der Support hat einen Artikel zum Umgang mit beschädigten Pflanzen. Kunden sehen ihn hier nie, auch nicht in der Suche, Mitarbeiter aber schon, im <a href="/admin">Admin</a>.</li>
+<li><strong>Bilder und Dateien.</strong> <a href="/de/help/articles/was-tun-wenn-deine-pflanze-ankommt">Dieser Artikel</a> hat ein Foto, eine PDF-Pflegeanleitung und auf Deutsch ein eigenes deutsches Bild neben dem geteilten Foto. Jeder Artikel hat seine Bilder und Dateien in einem Ordner, und Übersetzungen verwenden sie wieder, ohne erneutes Hochladen.</li>
 </ul>
 <h2>Der Admin</h2>
-<p>Der <a href="/admin">Admin</a> ist das Filament-Plugin. Melde dich mit <strong>admin@fernleaf.test</strong> und dem Passwort <strong>Pl3nts&amp;P0ts!</strong> an (schon ausgefüllt). Dort bearbeitest du jede Sprache in einem eigenen Tab, markierst Übersetzungen als veraltet, stellst einen Artikel auf intern und sortierst die FAQ.</p>
+<p>Der <a href="/admin">Admin</a> ist das Filament-Plugin. Melde dich mit <strong>admin@fernleaf.test</strong> und dem Passwort <strong>Pl3nts&amp;P0ts!</strong> an (schon ausgefüllt). Dort bearbeitest du jede Sprache in einem eigenen Tab, markierst Übersetzungen als veraltet, stellst einen Artikel auf intern und sortierst die FAQ. Im Editor fügen „Bild einfügen“ und „Datei anhängen“ vorhandene Bilder und Dateien des Artikels ein oder laden neue hoch; der Tab „Dateien“ zeigt alle, mit ihrer Verwendung, und ein Artikel, der noch auf ein gelöschtes Bild verweist, bleibt markiert, bis er korrigiert ist. „Auf der Website ansehen“ öffnet den Artikel hier in einem neuen Tab.</p>
 <h2>Technik</h2>
 <p>Diese Demo läuft mit laravel-knowledge-base {$core} und filament-knowledge-base {$plugin}. Die öffentlichen Seiten gehören zu dieser Demo-App, nicht zu den Paketen. Der Quellcode liegt <a href="{$links['demo']}">auf GitHub</a>.</p>
 HTML,
