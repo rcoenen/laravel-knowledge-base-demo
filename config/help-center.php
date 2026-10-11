@@ -17,8 +17,10 @@ return [
 
     'brand' => 'Fernleaf',
 
-    // An .svg file, inlined and drawn on an accent-coloured circle.
-    'logo' => resource_path('images/fernleaf-logo.svg'),
+    // The logo before the brand name: an image URL (shown as is, also used
+    // as the browser tab icon), or a path to an .svg file that is inlined
+    // and drawn on an accent-coloured circle.
+    'logo' => '/images/fernleaf-logo.svg',
 
     // The flag shown for each language in the language switcher (an .svg in
     // resources/images/flags, from flag-icons). A language is not a country:

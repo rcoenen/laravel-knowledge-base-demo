@@ -26,6 +26,9 @@
         {{-- Readers whose language isn't offered get the authoritative version. --}}
         <link rel="alternate" hreflang="x-default" href="{{ $switch[\JeffersonGoncalves\KnowledgeBase\Support\Locales::default()] }}">
     @endif
+    @if (is_string($logo) && $logo !== '' && ! $logoSvg)
+        <link rel="icon" href="{{ $logo }}">
+    @endif
     @include('help.partials.styles')
 </head>
 <body class="kb">

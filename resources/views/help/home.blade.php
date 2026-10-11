@@ -16,7 +16,7 @@
     @if ($about)
         <div class="kb-wrap">
             <a class="kb-about" href="{{ HelpRoutes::url('article', $locale, ['slug' => $about->slug]) }}" data-about>
-                <span class="kb-brand__logo" aria-hidden="true">{!! file_get_contents(resource_path('images/fernleaf-logo.svg')) !!}</span>
+                <span class="kb-brand__logo kb-brand__logo--image" aria-hidden="true"><img src="{{ config('help-center.logo') }}" alt=""></span>
                 <span class="kb-about__text">
                     <span class="kb-about__title">{{ __('help.about_title') }}</span>
                     <span class="kb-about__body">{{ __('help.about_body') }}</span>
