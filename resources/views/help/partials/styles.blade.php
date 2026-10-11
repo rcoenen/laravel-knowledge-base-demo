@@ -164,6 +164,7 @@ a.kb-langs__item:hover { background: var(--kb-mist); color: var(--kb-ink) !impor
 .kb-prose blockquote { margin: 1.5em 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--kb-accent); color: var(--kb-slate); }
 .kb-prose code { padding: 1px 5px; border-radius: 4px; background: var(--kb-mist); font-size: 0.92em; }
 .kb-prose img, .kb-prose video, .kb-prose iframe { max-width: 100%; height: auto; border-radius: 8px; }
+.kb-prose img { display: block; margin: 1.5em 0; }
 .kb-prose table { width: 100%; margin: 1.5em 0; border-collapse: collapse; font-size: 0.95rem; }
 .kb-prose th, .kb-prose td { padding: 8px 10px; border-bottom: 1px solid var(--kb-rule); text-align: left; vertical-align: top; }
 .kb-prose th { font-weight: 650; }
