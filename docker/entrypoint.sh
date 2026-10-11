@@ -30,6 +30,13 @@ if ! grep -q '^APP_KEY=base64:' .env; then
   php artisan key:generate --force
 fi
 
+# Serve files on the public disk (images in articles) under /storage, like
+# `php artisan storage:link`, but relative so the link also works outside
+# the container.
+if [ ! -e public/storage ]; then
+  ln -s ../storage/app/public public/storage
+fi
+
 if ! php artisan migrate:status >/dev/null 2>&1; then
   php artisan migrate --force --seed
 fi

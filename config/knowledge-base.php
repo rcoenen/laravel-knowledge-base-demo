@@ -96,4 +96,11 @@ return [
     */
     'search_engine' => 'database',
     'search_results_limit' => 20,
+
+    // Where images added in the article editor are stored (read by the
+    // Filament plugin from the release after 3.2.0 on).
+    'attachments' => [
+        'disk' => env('KB_ATTACHMENTS_DISK', 'public'),
+        'directory' => env('KB_ATTACHMENTS_DIRECTORY', 'knowledge-base/attachments'),
+    ],
 ];
