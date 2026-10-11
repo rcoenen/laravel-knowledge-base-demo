@@ -31,6 +31,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->brandName('Fernleaf admin')
+            ->brandLogo(fn () => view('filament.brand'))
+            ->brandLogoHeight('2rem')
+            ->favicon(asset('images/fernleaf-logo.svg'))
             ->plugins([KnowledgeBasePlugin::make()])
             ->colors([
                 'primary' => Color::Green,
