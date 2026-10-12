@@ -20,6 +20,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         // The seeder stores article assets; keep them out of the real storage.
+        Storage::fake('local');
         Storage::fake('public');
     }
 }

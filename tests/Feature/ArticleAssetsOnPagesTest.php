@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use JeffersonGoncalves\KnowledgeBase\Models\Article;
 use JeffersonGoncalves\KnowledgeBase\Models\ArticleAsset;
 use JeffersonGoncalves\KnowledgeBase\Support\ArticleAssets;
@@ -33,17 +33,31 @@ it('shows the shared image and the German image on the German page', function ()
     $response->assertOk()
         ->assertSee('data-id="'.$shared->getAttribute('uuid').'"', false)
         ->assertSee('data-id="'.$german->getAttribute('uuid').'"', false)
-        ->assertSee('/knowledge-base/articles/'.$article->uuid.'/shared/', false)
-        ->assertSee('/knowledge-base/articles/'.$article->uuid.'/de/', false);
+        ->assertSee('src="'.app(ArticleAssets::class)->url($shared).'"', false)
+        ->assertSee('src="'.app(ArticleAssets::class)->url($german).'"', false);
+
+    // A public article's images are plain, cacheable URLs anyone can open.
+    $this->get(app(ArticleAssets::class)->url($shared))->assertOk();
 });
 
 it('builds asset URLs at request time, so a moved site keeps working', function () {
-    config(['filesystems.disks.public.url' => 'https://moved.test/storage']);
-    Storage::forgetDisk('public');
+    URL::forceRootUrl('https://moved.test');
 
     $this->get('/de/help/articles/was-tun-wenn-deine-pflanze-ankommt')
         ->assertOk()
-        ->assertSee('https://moved.test/storage/knowledge-base/articles/', false);
+        ->assertSee('://moved.test/knowledge-base/assets/', false);
+});
+
+it('keeps the internal article\'s image private', function () {
+    /** @var Article $claim */
+    $claim = Article::query()->where('slug', 'handling-a-damaged-plant-claim-internal')->firstOrFail();
+    /** @var ArticleAsset $photo */
+    $photo = $claim->assets()->firstOrFail();
+
+    $plain = route(ArticleAssets::ROUTE, ['asset' => $photo->uuid, 'name' => basename($photo->path)]);
+
+    $this->get($plain)->assertNotFound();
+    $this->get(app(ArticleAssets::class)->url($photo))->assertOk();
 });
 
 it('never shows an image that was deleted', function () {
