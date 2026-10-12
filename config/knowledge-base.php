@@ -1,6 +1,7 @@
 <?php
 
 use JeffersonGoncalves\KnowledgeBase\Models\Article;
+use JeffersonGoncalves\KnowledgeBase\Models\ArticleAsset;
 use JeffersonGoncalves\KnowledgeBase\Models\ArticleFeedback;
 use JeffersonGoncalves\KnowledgeBase\Models\ArticleRelation;
 use JeffersonGoncalves\KnowledgeBase\Models\ArticleTranslation;
@@ -43,6 +44,7 @@ return [
         'category_translation' => CategoryTranslation::class,
         'collection' => Collection::class,
         'collection_translation' => CollectionTranslation::class,
+        'article_asset' => ArticleAsset::class,
     ],
 
     /*
@@ -97,10 +99,18 @@ return [
     'search_engine' => 'database',
     'search_results_limit' => 20,
 
-    // Where images added in the article editor are stored (read by the
-    // Filament plugin from the release after 3.2.0 on).
+    // Where an article's images and files are stored (see the core's
+    // ArticleAssets): one folder per article under this directory.
     'attachments' => [
         'disk' => env('KB_ATTACHMENTS_DISK', 'public'),
-        'directory' => env('KB_ATTACHMENTS_DIRECTORY', 'knowledge-base/attachments'),
+        'directory' => env('KB_ATTACHMENTS_DIRECTORY', 'knowledge-base'),
+        'images' => [
+            'accepted_types' => ['image/jpeg', 'image/png', 'image/webp'],
+            'max_size' => (int) env('KB_ATTACHMENTS_IMAGES_MAX_SIZE', 5120),
+        ],
+        'files' => [
+            'accepted_types' => ['application/pdf'],
+            'max_size' => (int) env('KB_ATTACHMENTS_FILES_MAX_SIZE', 10240),
+        ],
     ],
 ];

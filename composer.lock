@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee1b1daffedb9a11459a47085c01ee93",
+    "content-hash": "125b95c0e8b8565684326e6d0ca6c21d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2183,21 +2183,21 @@
         },
         {
             "name": "jeffersongoncalves/filament-knowledge-base",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeffersongoncalves/filament-knowledge-base.git",
-                "reference": "5246fdeefa88ce35e04b2911a2c14f02d3857801"
+                "reference": "7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeffersongoncalves/filament-knowledge-base/zipball/5246fdeefa88ce35e04b2911a2c14f02d3857801",
-                "reference": "5246fdeefa88ce35e04b2911a2c14f02d3857801",
+                "url": "https://api.github.com/repos/jeffersongoncalves/filament-knowledge-base/zipball/7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f",
+                "reference": "7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f",
                 "shasum": ""
             },
             "require": {
                 "filament/filament": "^5.3",
-                "jeffersongoncalves/laravel-knowledge-base": "^1.1",
+                "jeffersongoncalves/laravel-knowledge-base": "^2.0",
                 "php": "^8.2",
                 "spatie/laravel-package-tools": "^1.14.0"
             },
@@ -2244,7 +2244,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jeffersongoncalves/filament-knowledge-base/issues",
-                "source": "https://github.com/jeffersongoncalves/filament-knowledge-base/tree/3.2.0"
+                "source": "https://github.com/jeffersongoncalves/filament-knowledge-base/tree/3.3.0"
             },
             "funding": [
                 {
@@ -2256,20 +2256,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-11T16:29:45+00:00"
+            "time": "2026-10-11T21:52:56+00:00"
         },
         {
             "name": "jeffersongoncalves/laravel-knowledge-base",
-            "version": "v1.1.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeffersongoncalves/laravel-knowledge-base.git",
-                "reference": "386ca274a814fac9fc86d9de90e9b96b70b136e0"
+                "reference": "98122c1515de8a13110bd76d003309bff78520df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-knowledge-base/zipball/386ca274a814fac9fc86d9de90e9b96b70b136e0",
-                "reference": "386ca274a814fac9fc86d9de90e9b96b70b136e0",
+                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-knowledge-base/zipball/98122c1515de8a13110bd76d003309bff78520df",
+                "reference": "98122c1515de8a13110bd76d003309bff78520df",
                 "shasum": ""
             },
             "require": {
@@ -2281,6 +2281,7 @@
                 "spatie/laravel-package-tools": "^1.15"
             },
             "require-dev": {
+                "jeffersongoncalves/pest-plugin-database-migrations": "^1.0",
                 "larastan/larastan": "^2.9|^3.0",
                 "laravel/pint": "^1.0",
                 "nunomaduro/collision": "^8.0",
@@ -2325,7 +2326,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jeffersongoncalves/laravel-knowledge-base/issues",
-                "source": "https://github.com/jeffersongoncalves/laravel-knowledge-base/tree/v1.1.0"
+                "source": "https://github.com/jeffersongoncalves/laravel-knowledge-base/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -2337,7 +2338,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-11T14:37:13+00:00"
+            "time": "2026-10-11T21:27:41+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -4274,16 +4275,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.32.0",
+            "version": "v4.28.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "41f045c1f632e1474e15d4c7bc3abcb4a153563d"
+                "reference": "ab05a09fe6fce57c90338f83280648a9786ce36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/41f045c1f632e1474e15d4c7bc3abcb4a153563d",
-                "reference": "41f045c1f632e1474e15d4c7bc3abcb4a153563d",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/ab05a09fe6fce57c90338f83280648a9786ce36b",
+                "reference": "ab05a09fe6fce57c90338f83280648a9786ce36b",
                 "shasum": ""
             },
             "require": {
@@ -4293,17 +4294,17 @@
                 "ext-libxml": "*",
                 "ext-xmlreader": "*",
                 "ext-zip": "*",
-                "php": "~8.3.0 || ~8.4.0 || ~8.5.0"
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "friendsofphp/php-cs-fixer": "^3.86.0",
-                "infection/infection": "^0.31.2",
-                "phpbench/phpbench": "^1.4.1",
-                "phpstan/phpstan": "^2.1.22",
-                "phpstan/phpstan-phpunit": "^2.0.7",
-                "phpstan/phpstan-strict-rules": "^2.0.6",
-                "phpunit/phpunit": "^12.3.7"
+                "friendsofphp/php-cs-fixer": "^3.68.3",
+                "infection/infection": "^0.29.10",
+                "phpbench/phpbench": "^1.4.0",
+                "phpstan/phpstan": "^2.1.2",
+                "phpstan/phpstan-phpunit": "^2.0.4",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpunit/phpunit": "^11.5.4"
             },
             "suggest": {
                 "ext-iconv": "To handle non UTF-8 CSV files (if \"php-mbstring\" is not already installed or is too limited)",
@@ -4351,7 +4352,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.32.0"
+                "source": "https://github.com/openspout/openspout/tree/v4.28.5"
             },
             "funding": [
                 {
@@ -4363,7 +4364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-03T16:03:54+00:00"
+            "time": "2025-01-30T13:51:11+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -9072,16 +9073,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.32.1",
+            "version": "v1.30.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "006bd7825eb01daf92959d060b89cd9514fe4253"
+                "reference": "a96cb6eee2961905d2fce7207aefb80945bf6b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/006bd7825eb01daf92959d060b89cd9514fe4253",
-                "reference": "006bd7825eb01daf92959d060b89cd9514fe4253",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/a96cb6eee2961905d2fce7207aefb80945bf6b28",
+                "reference": "a96cb6eee2961905d2fce7207aefb80945bf6b28",
                 "shasum": ""
             },
             "require": {
@@ -9089,19 +9090,19 @@
                 "ext-mbstring": "*",
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
-                "php": "^8.3.0"
+                "php": "^8.2.0"
             },
             "require-dev": {
                 "composer/semver": "^3.4.4",
-                "friendsofphp/php-cs-fixer": "^3.95.25",
-                "illuminate/view": "^13.31.0",
-                "larastan/larastan": "^3.11.0",
-                "laravel-zero/framework": "^13.0.0",
+                "friendsofphp/php-cs-fixer": "^3.95.18",
+                "illuminate/view": "^12.65.0",
+                "larastan/larastan": "^3.10.0",
+                "laravel-zero/framework": "^12.1.0",
                 "laravel/agent-detector": "^2.0.2",
-                "laravel/prompts": "^0.3.24",
-                "mockery/mockery": "^1.6.15",
+                "laravel/prompts": "^0.3.22",
+                "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^2.4.0",
-                "pestphp/pest": "^4.7.8"
+                "pestphp/pest": "^3.8.7"
             },
             "bin": [
                 "builds/pint"
@@ -9138,7 +9139,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2026-09-10T10:47:55+00:00"
+            "time": "2026-08-05T16:47:22+00:00"
         },
         {
             "name": "laravel/sail",
@@ -11925,5 +11926,8 @@
         "php": "^8.2"
     },
     "platform-dev": {},
+    "platform-overrides": {
+        "php": "8.2.0"
+    },
     "plugin-api-version": "2.9.0"
 }

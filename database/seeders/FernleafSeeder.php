@@ -6,12 +6,15 @@ use Composer\InstalledVersions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Number;
 use Illuminate\Support\Str;
+use JeffersonGoncalves\KnowledgeBase\Enums\AssetKind;
 use JeffersonGoncalves\KnowledgeBase\Enums\TranslationStatus;
 use JeffersonGoncalves\KnowledgeBase\Models\Article;
 use JeffersonGoncalves\KnowledgeBase\Models\Category;
 use JeffersonGoncalves\KnowledgeBase\Models\Collection;
 use JeffersonGoncalves\KnowledgeBase\Services\KnowledgeBaseService;
+use JeffersonGoncalves\KnowledgeBase\Support\ArticleAssets;
 use JeffersonGoncalves\KnowledgeBase\Support\Locales;
 
 /**
@@ -235,6 +238,10 @@ HTML,
             'content' => '<p>Internal: ask for a photo, then offer a replacement or a refund.</p>',
         ], visibility: 'internal');
 
+        // One shared image used in English and German, one German-only image and
+        // one PDF attachment, so the demo shows the whole asset flow.
+        $this->attachAssets($arrival);
+
         $howOften->relatedArticles()->attach($lowLight->getKey(), ['sort_order' => 1]);
         $lowLight->relatedArticles()->attach($howOften->getKey(), ['sort_order' => 1]);
         $arrival->relatedArticles()->attach($howOften->getKey(), ['sort_order' => 1]);
@@ -267,6 +274,53 @@ HTML,
     }
 
     /**
+     * Give one article a shared image, a German-only image and a PDF, and put
+     * them in the article's content: the shared image in both languages, the
+     * German image and the file link only in the language that uses them.
+     */
+    private function attachAssets(Article $article): void
+    {
+        $assets = app(ArticleAssets::class);
+        $directory = database_path('seeders/assets');
+
+        $shared = $assets->store($article, $directory.'/fernleaf-plant.png', AssetKind::Image);
+        $guide = $assets->store($article, $directory.'/fernleaf-care-guide.pdf', AssetKind::File);
+        $german = $this->translate
+            ? $assets->store($article, $directory.'/fernleaf-plant-de.png', AssetKind::Image, self::TRANSLATION_LOCALE)
+            : null;
+
+        $sharedImage = $this->imageMarkup($assets, $shared, 'A fern in a pot');
+        $guideLink = '<p><a href="'.$assets->url($guide).'">'
+            .$guide->getAttribute('original_name').', '
+            .Number::fileSize((int) $guide->getAttribute('size')).'</a></p>';
+
+        $english = $article->translation(Locales::default());
+
+        if ($english instanceof Model) {
+            $english->update(['content' => (string) $english->getAttribute('content').$sharedImage.$guideLink]);
+        }
+
+        if ($german instanceof Model) {
+            $germanImage = $this->imageMarkup($assets, $german, 'Eine Farnpflanze im Topf');
+            $translation = $article->translation(self::TRANSLATION_LOCALE);
+
+            if ($translation instanceof Model) {
+                $translation->update(['content' => (string) $translation->getAttribute('content').$sharedImage.$germanImage]);
+            }
+        }
+    }
+
+    /**
+     * An image element that refers to an asset by its id, with the current URL
+     * as a cache (the public pages recompute it).
+     */
+    private function imageMarkup(ArticleAssets $assets, Model $asset, string $alt): string
+    {
+        return '<p><img data-id="'.$asset->getAttribute('uuid').'" src="'
+            .$assets->url($asset).'" alt="'.$alt.'"></p>';
+    }
+
+    /**
      * "About this demo": what Fernleaf is and what to try, with links to
      * the pages that show each feature.
      */
@@ -291,9 +345,10 @@ HTML,
 <li><strong>Slugs per language.</strong> An English address under /de, like <a href="/de/help/articles/when-will-my-order-arrive">this one</a>, redirects to the German address.</li>
 <li><strong>An FAQ collection.</strong> The <a href="/en/help/collections/frequently-asked-questions">frequently asked questions</a> are a hand-picked, ordered list of articles from several topics.</li>
 <li><strong>Internal articles.</strong> Support staff have an article on handling damaged-plant claims. Customers never see it here, not even in search, but staff do in the <a href="/admin">admin</a>.</li>
+<li><strong>Images and files.</strong> <a href="/en/help/articles/what-to-do-when-your-plant-arrives">This article</a> has a photo, a PDF care guide and, <a href="/de/help/articles/was-tun-wenn-deine-pflanze-ankommt">in German</a>, its own German picture next to the shared photo. Each article keeps its images and files in one folder, and translations reuse them without uploading again.</li>
 </ul>
 <h2>The admin</h2>
-<p>The <a href="/admin">admin</a> is the Filament plugin. Sign in with <strong>admin@fernleaf.test</strong> and password <strong>Pl3nts&amp;P0ts!</strong> (already filled in). There you edit each language in its own tab, mark translations as outdated, set an article to internal and reorder the FAQ.</p>
+<p>The <a href="/admin">admin</a> is the Filament plugin. Sign in with <strong>admin@fernleaf.test</strong> and password <strong>Pl3nts&amp;P0ts!</strong> (already filled in). There you edit each language in its own tab, mark translations as outdated, set an article to internal and reorder the FAQ. In the editor, Insert image and Attach file reuse the article's images and files or upload new ones; the Assets tab shows them all, with where each one is used, and an article that still refers to a deleted image is flagged until it's fixed. View on site opens the article here in a new tab.</p>
 <h2>Under the hood</h2>
 <p>This demo runs on laravel-knowledge-base {$core} and filament-knowledge-base {$plugin}. The public pages are part of this demo app, not of the packages. The source is <a href="{$links['demo']}">on GitHub</a>.</p>
 HTML,
@@ -312,9 +367,10 @@ HTML,
 <li><strong>Adressen pro Sprache.</strong> Eine englische Adresse unter /de, wie <a href="/de/help/articles/when-will-my-order-arrive">diese</a>, leitet zur deutschen Adresse weiter.</li>
 <li><strong>Eine FAQ-Sammlung.</strong> Die <a href="/de/help/collections/haeufige-fragen">häufigen Fragen</a> sind eine ausgewählte, sortierte Liste von Artikeln aus mehreren Themen.</li>
 <li><strong>Interne Artikel.</strong> Der Support hat einen Artikel zum Umgang mit beschädigten Pflanzen. Kunden sehen ihn hier nie, auch nicht in der Suche, Mitarbeiter aber schon, im <a href="/admin">Admin</a>.</li>
+<li><strong>Bilder und Dateien.</strong> <a href="/de/help/articles/was-tun-wenn-deine-pflanze-ankommt">Dieser Artikel</a> hat ein Foto, eine PDF-Pflegeanleitung und auf Deutsch ein eigenes deutsches Bild neben dem geteilten Foto. Jeder Artikel hat seine Bilder und Dateien in einem Ordner, und Übersetzungen verwenden sie wieder, ohne erneutes Hochladen.</li>
 </ul>
 <h2>Der Admin</h2>
-<p>Der <a href="/admin">Admin</a> ist das Filament-Plugin. Melde dich mit <strong>admin@fernleaf.test</strong> und dem Passwort <strong>Pl3nts&amp;P0ts!</strong> an (schon ausgefüllt). Dort bearbeitest du jede Sprache in einem eigenen Tab, markierst Übersetzungen als veraltet, stellst einen Artikel auf intern und sortierst die FAQ.</p>
+<p>Der <a href="/admin">Admin</a> ist das Filament-Plugin. Melde dich mit <strong>admin@fernleaf.test</strong> und dem Passwort <strong>Pl3nts&amp;P0ts!</strong> an (schon ausgefüllt). Dort bearbeitest du jede Sprache in einem eigenen Tab, markierst Übersetzungen als veraltet, stellst einen Artikel auf intern und sortierst die FAQ. Im Editor fügen „Bild einfügen“ und „Datei anhängen“ vorhandene Bilder und Dateien des Artikels ein oder laden neue hoch; der Tab „Dateien“ zeigt alle, mit ihrer Verwendung, und ein Artikel, der noch auf ein gelöschtes Bild verweist, bleibt markiert, bis er korrigiert ist. „Auf der Website ansehen“ öffnet den Artikel hier in einem neuen Tab.</p>
 <h2>Technik</h2>
 <p>Diese Demo läuft mit laravel-knowledge-base {$core} und filament-knowledge-base {$plugin}. Die öffentlichen Seiten gehören zu dieser Demo-App, nicht zu den Paketen. Der Quellcode liegt <a href="{$links['demo']}">auf GitHub</a>.</p>
 HTML,
