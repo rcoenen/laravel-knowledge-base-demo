@@ -83,6 +83,8 @@ The first article in the help center, "About this demo", links to each of these.
 | ![The about article listing what to try](docs/screenshots/about.jpg) | ![Editing the German version, marked outdated](docs/screenshots/admin-language-tabs.jpg) |
 | **German reader, English-only article** | **German reader, outdated translation** |
 | ![Notice that the article is not available in German yet](docs/screenshots/missing-translation-de.jpg) | ![Warning that the English version changed after translation](docs/screenshots/outdated-translation-de.jpg) |
+| **Admin: insert an image in German** | **Admin: the article's images and files** |
+| ![The Insert image dialog offering the shared image and the German one](docs/screenshots/admin-insert-image.jpg) | ![The Assets tab: a card per image or file, with its scope and where it is used](docs/screenshots/admin-assets.jpg) |
 
 ## What's where
 
