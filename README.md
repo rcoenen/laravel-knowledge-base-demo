@@ -28,8 +28,8 @@ A help section is more than a few pages of text. The knowledge base core provide
 
 | Package | Version |
 |---|---|
-| [jeffersongoncalves/laravel-knowledge-base](https://github.com/jeffersongoncalves/laravel-knowledge-base) | 1.1.0 |
-| [jeffersongoncalves/filament-knowledge-base](https://github.com/jeffersongoncalves/filament-knowledge-base) | 3.2.0 |
+| [jeffersongoncalves/laravel-knowledge-base](https://github.com/jeffersongoncalves/laravel-knowledge-base) | 2.0.0 |
+| [jeffersongoncalves/filament-knowledge-base](https://github.com/jeffersongoncalves/filament-knowledge-base) | 3.3.0 |
 | Laravel / Filament | 12 / 5 |
 
 The versions are pinned exactly (and `composer.lock` is committed), so the demo keeps working as it is. Newer releases may change things this demo doesn't follow.

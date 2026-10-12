@@ -19,7 +19,8 @@ use JeffersonGoncalves\KnowledgeBase\Support\Locales;
  * default-language version the migration stops before changing anything and
  * names those articles, so they can be translated first.
  *
- * `down()` re-adds the column, filled with the configured default.
+ * `down()` re-adds the column, filled with the configured default, even when
+ * the current language configuration does not validate.
  */
 return new class extends Migration
 {
@@ -48,7 +49,10 @@ return new class extends Migration
             return;
         }
 
-        $defaultLocale = Locales::default();
+        // Read the raw value instead of Locales::default(): a rollback must not
+        // fail because the current language configuration is invalid.
+        $defaultLocale = config('knowledge-base.default_locale');
+        $defaultLocale = is_string($defaultLocale) && $defaultLocale !== '' ? $defaultLocale : 'en';
 
         Schema::table($prefix.'articles', function (Blueprint $table) use ($defaultLocale) {
             $table->string('source_locale', 16)->default($defaultLocale);
@@ -91,29 +95,38 @@ return new class extends Migration
             );
         }
 
-        foreach ($articles as $article) {
-            $version = $versions->get($article->id);
+        // All rewrites succeed or none do.
+        DB::transaction(function () use ($articles, $versions, $prefix, $defaultLocale): void {
+            foreach ($articles as $article) {
+                $this->promote($prefix, $defaultLocale, $article, $versions->get($article->id));
+            }
+        });
+    }
 
-            DB::table($prefix.'articles')->where('id', $article->id)->update([
-                'title' => $version->title,
-                'slug' => $version->slug,
-                'content' => $version->content,
-                'excerpt' => $version->excerpt,
-                'seo_title' => $version->seo_title,
-                'seo_description' => $version->seo_description,
-                'seo_keywords' => $version->seo_keywords,
-                'source_locale' => $defaultLocale,
+    /**
+     * Mirror one article's default-language version onto its own row.
+     */
+    protected function promote(string $prefix, string $defaultLocale, object $article, object $version): void
+    {
+        DB::table($prefix.'articles')->where('id', $article->id)->update([
+            'title' => $version->title,
+            'slug' => $version->slug,
+            'content' => $version->content,
+            'excerpt' => $version->excerpt,
+            'seo_title' => $version->seo_title,
+            'seo_description' => $version->seo_description,
+            'seo_keywords' => $version->seo_keywords,
+            'source_locale' => $defaultLocale,
+            'updated_at' => now(),
+        ]);
+
+        // The promoted (default-language) version becomes the authoritative
+        // one, so it follows the article's status from now on.
+        DB::table($prefix.'article_translations')
+            ->where('id', $version->id)
+            ->update([
+                'status' => $article->status === 'published' ? 'published' : 'draft',
                 'updated_at' => now(),
             ]);
-
-            // The promoted (default-language) version becomes the authoritative
-            // one, so it follows the article's status from now on.
-            DB::table($prefix.'article_translations')
-                ->where('id', $version->id)
-                ->update([
-                    'status' => $article->status === 'published' ? 'published' : 'draft',
-                    'updated_at' => now(),
-                ]);
-        }
     }
 };
