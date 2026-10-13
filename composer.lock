@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "125b95c0e8b8565684326e6d0ca6c21d",
+    "content-hash": "1f2092ad2d32d44d091f1f572ab36254",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2183,16 +2183,16 @@
         },
         {
             "name": "jeffersongoncalves/filament-knowledge-base",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeffersongoncalves/filament-knowledge-base.git",
-                "reference": "7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f"
+                "reference": "2e8bbd3e77abdbeffc41d08debc0301a94f87e37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeffersongoncalves/filament-knowledge-base/zipball/7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f",
-                "reference": "7aa0038ffeaaf42b8a82e318d7b6dfe1e721577f",
+                "url": "https://api.github.com/repos/jeffersongoncalves/filament-knowledge-base/zipball/2e8bbd3e77abdbeffc41d08debc0301a94f87e37",
+                "reference": "2e8bbd3e77abdbeffc41d08debc0301a94f87e37",
                 "shasum": ""
             },
             "require": {
@@ -2244,7 +2244,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jeffersongoncalves/filament-knowledge-base/issues",
-                "source": "https://github.com/jeffersongoncalves/filament-knowledge-base/tree/3.3.0"
+                "source": "https://github.com/jeffersongoncalves/filament-knowledge-base/tree/3.3.1"
             },
             "funding": [
                 {
@@ -2256,20 +2256,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-11T21:52:56+00:00"
+            "time": "2026-10-12T21:46:26+00:00"
         },
         {
             "name": "jeffersongoncalves/laravel-knowledge-base",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeffersongoncalves/laravel-knowledge-base.git",
-                "reference": "98122c1515de8a13110bd76d003309bff78520df"
+                "reference": "40ce24236c8a3aee1732fb7c5f6e59d3e23146d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-knowledge-base/zipball/98122c1515de8a13110bd76d003309bff78520df",
-                "reference": "98122c1515de8a13110bd76d003309bff78520df",
+                "url": "https://api.github.com/repos/jeffersongoncalves/laravel-knowledge-base/zipball/40ce24236c8a3aee1732fb7c5f6e59d3e23146d9",
+                "reference": "40ce24236c8a3aee1732fb7c5f6e59d3e23146d9",
                 "shasum": ""
             },
             "require": {
@@ -2326,7 +2326,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jeffersongoncalves/laravel-knowledge-base/issues",
-                "source": "https://github.com/jeffersongoncalves/laravel-knowledge-base/tree/v2.0.0"
+                "source": "https://github.com/jeffersongoncalves/laravel-knowledge-base/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -2338,7 +2338,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-11T21:27:41+00:00"
+            "time": "2026-10-12T21:41:30+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
