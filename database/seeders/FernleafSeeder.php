@@ -231,12 +231,13 @@ HTML,
 HTML,
         ]);
 
-        // Staff-only: must never appear on the public pages.
-        $this->article($orders, [
+        // Staff-only: must never appear on the public pages, and neither may its image.
+        $claim = $this->article($orders, [
             'title' => 'Handling a damaged-plant claim (internal)',
             'excerpt' => 'Internal procedure for support staff.',
             'content' => '<p>Internal: ask for a photo, then offer a replacement or a refund.</p>',
         ], visibility: 'internal');
+        $this->attachInternalImage($claim);
 
         // One shared image used in English and German, one German-only image and
         // one PDF attachment, so the demo shows the whole asset flow.
@@ -311,6 +312,23 @@ HTML,
     }
 
     /**
+     * An example photo in the internal article. It is served only through
+     * signed URLs, so its address works in the admin and nowhere else.
+     */
+    private function attachInternalImage(Article $article): void
+    {
+        $assets = app(ArticleAssets::class);
+        $photo = $assets->store($article, database_path('seeders/assets/fernleaf-plant.png'), AssetKind::Image);
+        $english = $article->translation(Locales::default());
+
+        if ($english instanceof Model) {
+            $english->update(['content' => (string) $english->getAttribute('content')
+                .'<p>An example of the photo to ask for:</p>'
+                .$this->imageMarkup($assets, $photo, 'Example photo of a plant')]);
+        }
+    }
+
+    /**
      * An image element that refers to an asset by its id, with the current URL
      * as a cache (the public pages recompute it).
      */
@@ -344,7 +362,7 @@ HTML,
 <li><strong>Search per language.</strong> <a href="/de/help/search?q=Lieferung">Search in German</a> finds the German versions.</li>
 <li><strong>Slugs per language.</strong> An English address under /de, like <a href="/de/help/articles/when-will-my-order-arrive">this one</a>, redirects to the German address.</li>
 <li><strong>An FAQ collection.</strong> The <a href="/en/help/collections/frequently-asked-questions">frequently asked questions</a> are a hand-picked, ordered list of articles from several topics.</li>
-<li><strong>Internal articles.</strong> Support staff have an article on handling damaged-plant claims. Customers never see it here, not even in search, but staff do in the <a href="/admin">admin</a>.</li>
+<li><strong>Internal articles.</strong> Support staff have an article on handling damaged-plant claims. Customers never see it here, not even in search, but staff do in the <a href="/admin">admin</a>. Its image is private as well: the admin shows it through an address that expires, which doesn't work for anyone else.</li>
 <li><strong>Images and files.</strong> <a href="/en/help/articles/what-to-do-when-your-plant-arrives">This article</a> has a photo, a PDF care guide and, <a href="/de/help/articles/was-tun-wenn-deine-pflanze-ankommt">in German</a>, its own German picture next to the shared photo. Each article keeps its images and files in one folder, and translations reuse them without uploading again.</li>
 </ul>
 <h2>The admin</h2>

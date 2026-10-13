@@ -28,8 +28,8 @@ A help section is more than a few pages of text. The knowledge base core provide
 
 | Package | Version |
 |---|---|
-| [jeffersongoncalves/laravel-knowledge-base](https://github.com/jeffersongoncalves/laravel-knowledge-base) | 2.0.0 |
-| [jeffersongoncalves/filament-knowledge-base](https://github.com/jeffersongoncalves/filament-knowledge-base) | 3.3.0 |
+| [jeffersongoncalves/laravel-knowledge-base](https://github.com/jeffersongoncalves/laravel-knowledge-base) | 2.1.0 |
+| [jeffersongoncalves/filament-knowledge-base](https://github.com/jeffersongoncalves/filament-knowledge-base) | 3.3.1 |
 | Laravel / Filament | 12 / 5 |
 
 The versions are pinned exactly (and `composer.lock` is committed), so the demo keeps working as it is. Newer releases may change things this demo doesn't follow.
@@ -72,8 +72,8 @@ The first article in the help center, "About this demo", links to each of these.
 - **Search per language.** A German search finds German versions.
 - **Slugs per language.** Each language has its own address; an English address under `/de` redirects to the German one.
 - **An FAQ collection.** A hand-picked, ordered list of articles from several topics, shown as quick answers on the home page.
-- **Internal articles.** A staff-only article never appears in the public pages or search, but does in the admin.
-- **Images and files.** Each article keeps its images and files in its own folder (`knowledge-base/articles/{uuid}/shared` and `/de`). Translations reuse the shared ones; a language can add its own. In the admin, Insert image and Attach file pick from them or upload new ones, the Assets tab lists them with where each is used, and an article that still refers to a deleted image is flagged until fixed.
+- **Internal articles.** A staff-only article never appears in the public pages or search, but does in the admin. Its image is private too: the admin shows it through an address that expires, and its plain address returns "not found".
+- **Images and files.** Each article keeps its images and files in its own folder on a private disk (`storage/app/private/knowledge-base/articles/{uuid}/shared` and `/de`); readers get them through the package's asset route, which checks the article's visibility. Translations reuse the shared ones; a language can add its own. In the admin, Insert image and Attach file pick from them or upload new ones, the Assets tab lists them with where each is used, and an article that still refers to a deleted image is flagged until fixed.
 - **View on site.** From an article in the admin, open its public page per language in a new tab.
 
 ## Screenshots
